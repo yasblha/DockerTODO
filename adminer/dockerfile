@@ -1,0 +1,17 @@
+FROM alpine:latest
+
+
+RUN apk add --no-cache php8 php8-session php8-pdo php8-pdo_mysql php8-json php8-openssl
+
+
+RUN mkdir -p /var/www/html/adminer
+
+
+RUN wget -O /var/www/html/adminer.php https://www.adminer.org/static/download/4.2.5/adminer-4.2.5-mysql.php
+
+
+EXPOSE 8080
+
+
+WORKDIR /var/www/html/adminer
+

@@ -1,0 +1,29 @@
+FROM alpine:3.14
+
+RUN apk --no-cache add \
+    php7 \
+    php7-fpm \
+    php7-json \
+    php7-dom \
+    php7-pdo \
+    php7-mbstring \
+    php7-ctype \
+    php7-session \
+    php7-tokenizer \
+    php7-xml \
+    php7-simplexml \
+    php7-fileinfo \
+    php7-xmlwriter \
+    php7-xmlreader \
+    php7-pdo_pgsql
+
+WORKDIR /var/www/html
+
+COPY . .
+
+RUN apk add --no-cache composer
+RUN composer install
+
+EXPOSE 8000
+
+CMD ["php", "bin/console", "server:run", "0.0.0.0:8000"]
